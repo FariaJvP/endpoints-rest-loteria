@@ -8,9 +8,7 @@ import br.com.loteria.repository.ApostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -26,6 +24,7 @@ public class ApostaController {
     @Autowired
     private ApostaRepository apostaRepository;
 
+    @PostMapping
     public ResponseEntity<ApostaDTO> cadastraAposta(Authentication authentication, UriComponentsBuilder uriComponentsBuilder){
         Apostador apostador = (Apostador) authentication.getPrincipal();
         Aposta aposta = apostaService.realizaAposta(apostador);
@@ -33,6 +32,7 @@ public class ApostaController {
         return ResponseEntity.created(uri).body(new ApostaDTO(aposta));
     }
 
+    @GetMapping("/{id}")
     public ResponseEntity<ApostaDTO> detalhar(@PathVariable Long id, Authentication authentication){
         Apostador apostador = (Apostador) authentication.getPrincipal();
 

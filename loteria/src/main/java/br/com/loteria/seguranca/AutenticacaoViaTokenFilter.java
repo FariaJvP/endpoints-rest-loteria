@@ -1,5 +1,6 @@
 package br.com.loteria.seguranca;
 
+import br.com.loteria.modelo.Apostador;
 import br.com.loteria.repository.ApostadorRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,7 +34,7 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 
     private void autenticaCliente(String token){
         Long idApostador = tokenService.getIdApostador(token);
-        Apostador apostador = apostadorRepository.findbyId(idApostador).get();
+        Apostador apostador = apostadorRepository.findById(idApostador).get();
         UsernamePasswordAuthenticationToken autenticacao = new UsernamePasswordAuthenticationToken(apostador, null, apostador.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(autenticacao);

@@ -1,5 +1,6 @@
 package br.com.loteria.seguranca;
 
+import br.com.loteria.modelo.Apostador;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
